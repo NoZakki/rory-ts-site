@@ -10,7 +10,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
-import AdminLoginPage from './pages/AdminLoginPage';
+import AdminLoginPage from './pages/AdminLoginPage';\nimport AdminPage from './pages/AdminPage';
 import AdminPage from './pages/AdminPage';
 import SupportPage from './pages/SupportPage';
 import FilesPage from './pages/FilesPage';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/share/:shareToken" element={<SharedFilePage />} />
 
           {/* Admin routes */}
-          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path=\"/admin-login\" element={<AdminLoginPage />} />\n          <Route path=\"/admin\" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
           <Route path="/admin" element={<AdminPage />} />
 
           {/* Support route */}

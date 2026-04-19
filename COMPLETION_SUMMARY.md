@@ -46,6 +46,7 @@ Congratulations! Your complete, production-ready secure cloud storage applicatio
 - ✅ Rate limiting on auth endpoints
 - ✅ File type validation
 - ✅ File size limits
+- ✅ **Storage quota per user (100MB default)** - NEW!
 - ✅ Random filenames (no path traversal)
 - ✅ Ownership verification
 - ✅ Activity logging for audit

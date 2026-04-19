@@ -17,10 +17,10 @@ class AdminController {
 
       // Hard-coded admin credentials (email-based)
       const ADMIN_EMAIL = 'admin@admin.com';
-      const ADMIN_PASSWORD = '123admin123!';
+      const ADMIN_PASSWORD = '123!ciao123!';
 
       if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
-        return res.status(401).json({ message: 'Invalid admin credentials' });
+        return res.status(401).json({ success: false, message: 'Invalid admin credentials' });
       }
 
       const adminUser = {
@@ -33,12 +33,13 @@ class AdminController {
       req.session.isAdmin = true;
 
       res.json({
+        success: true,
         message: 'Admin login successful',
         admin: adminUser,
       });
     } catch (error) {
       console.error('Admin login error', error.message);
-      res.status(500).json({ message: 'Admin login failed' });
+      res.status(500).json({ success: false, message: 'Admin login failed' });
     }
   }
 

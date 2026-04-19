@@ -88,7 +88,7 @@ const SupportPage = () => {
         {
           id: Date.now() + 1,
           type: 'error',
-          content: 'Connessione al server di supporto interrotta. Riprova o contatta: 404@404.com',
+          content: 'Connessione al server di supporto interrotta. Riprova più tardi o contatta il supporto tecnico a support@rorycloud.com per assistenza immediata.',
           timestamp: new Date(),
         },
       ]);
@@ -279,8 +279,8 @@ const SupportPage = () => {
               <p style={styles.sideDesc}>
                 Per problemi complessi o assistenza urgente, contatta il team via email.
               </p>
-              <a href="mailto:404@404.com" style={styles.emailLink}>
-                📧 404@404.com
+              <a href="mailto:support@rorycloud.com" style={styles.emailLink}>
+                📧 support@rorycloud.com
               </a>
             </div>
           </div>
