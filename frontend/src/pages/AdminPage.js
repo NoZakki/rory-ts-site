@@ -38,7 +38,7 @@ const AdminPage = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const loginRes = await adminAPI.adminLogin(adminEmail, adminPassword);
+      const loginRes = await adminAPI.login(adminEmail, adminPassword);
       if (loginRes.data.success) {
         setIsLoggedIn(true);
         setAdminEmail('');
