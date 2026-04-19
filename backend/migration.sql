@@ -1,0 +1,22 @@
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT FALSE;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS storage_used BIGINT DEFAULT 0;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS storage_limit BIGINT DEFAULT 524288000;
+
+DROP TABLE IF EXISTS file_shares CASCADE;
+
+CREATE TABLE IF NOT EXISTS file_shares (
+  id SERIAL PRIMARY KEY,
+  file_id INTEGER NOT NULL REFERENCES files(id) ON DELETE CASCADE,
+  share_token VARCHAR(64) UNIQUE NOT NULL,
+  shared_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  expires_at TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_file_shares_token ON file_shares(share_token);
+CREATE INDEX IF NOT EXISTS idx_file_shares_file_id ON file_shares(file_id);
+
+CREATE INDEX IF NOT EXISTS idx_users_is_admin ON users(is_admin);
+CREATE INDEX IF NOT EXISTS idx_users_is_active ON users(is_active);
+

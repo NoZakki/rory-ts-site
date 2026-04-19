@@ -1,0 +1,24 @@
+{
+  "name": "secure-cloud-storage",
+  "version": "1.0.0",
+  "description": "Full-stack secure cloud storage application",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "install:all": "node install-all.js",
+    "start": "node run-all.js",
+    "backend:build": "cd backend && npm install",
+    "frontend:build": "cd frontend && npm install",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "security",
+    "cloud-storage",
+    "encryption",
+    "nodejs",
+    "react"
+  ]
+}
