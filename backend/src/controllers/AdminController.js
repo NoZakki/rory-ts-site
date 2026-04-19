@@ -63,47 +63,7 @@ class AdminController {
     }
   }
 
-  /**
-   * Get system stats
-   */
-  static async getSystemStats(req, res) {
-    try {
-      const userCount = await pool.query('SELECT COUNT(*) FROM users');
-      const fileCount = await pool.query('SELECT COUNT(*) FROM files');
-      const totalSize = await pool.query('SELECT COALESCE(SUM(size), 0) as total FROM files');
 
-      res.json({
-        success: true,
-        stats: {
-          totalUsers: parseInt(userCount.rows[0].count),
-          totalFiles: parseInt(fileCount.rows[0].count),
-          totalSize: parseInt(totalSize.rows[0].total),
-        },
-      });
-    } catch (error) {
-      log('ERROR', 'Get stats error', { error: error.message });
-      res.status(500).json({ success: false, message: 'Failed to get stats' });
-    }
-  }
-
-  /**
-   * Get activity logs
-   */
-  static async getActivityLogs(req, res) {
-    try {
-      const result = await pool.query(
-        'SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 50'
-      );
-
-      res.json({
-        success: true,
-        logs: result.rows,
-      });
-    } catch (error) {
-      log('ERROR', 'Get logs error', { error: error.message });
-      res.status(500).json({ success: false, message: 'Failed to get logs' });
-    }
-  }
 
   /**
    * Toggle user active status
