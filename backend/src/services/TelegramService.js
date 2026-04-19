@@ -3,7 +3,7 @@
  * Handles keyword matching with smarter, more contextual AI responses
  */
 
-const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || '404@404.com';
+const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || 'support@rorycloud.com';
 
 class TelegramService {
   /**

@@ -89,6 +89,14 @@ class FileService {
         ipAddress
       );
 
+      // Send email notification
+      const User = require('../models/User');
+      const user = await User.findById(userId);
+      if (user) {
+        const EmailService = require('./EmailService');
+        EmailService.sendFileUploadedNotification(user.email, safeName);
+      }
+
       return {
         success: true,
         file: fileRecord

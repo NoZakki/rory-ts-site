@@ -22,16 +22,32 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     // SECURITY: Validate file extension to prevent malicious uploads
     const allowedExtensions = [
-      '.jpg', '.jpeg', '.png', '.gif', '.pdf', '.doc', '.docx',
-      '.txt', '.zip', '.rar'
+      // Immagini
+      '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp', '.ico', '.tiff',
+      // Documenti
+      '.pdf', '.doc', '.docx', '.odt', '.rtf', '.txt',
+      // Fogli di calcolo
+      '.xls', '.xlsx', '.ods', '.csv',
+      // Presentazioni
+      '.ppt', '.pptx', '.odp',
+      // Archivi
+      '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2',
+      // Audio
+      '.mp3', '.wav', '.ogg', '.flac', '.aac', '.m4a',
+      // Video
+      '.mp4', '.avi', '.mov', '.mkv', '.webm', '.wmv',
+      // Dati
+      '.json', '.xml', '.yaml', '.yml',
+      // Codice
+      '.js', '.ts', '.html', '.css', '.py', '.java', '.cpp', '.c', '.sh',
     ];
-    
+
     const ext = path.extname(file.originalname).toLowerCase();
-    
+
     if (!allowedExtensions.includes(ext)) {
-      return cb(new Error(`File extension ${ext} not allowed`));
+      return cb(new Error(`Tipo di file ${ext} non supportato`));
     }
-    
+
     cb(null, true);
   },
 });

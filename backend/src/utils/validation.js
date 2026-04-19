@@ -91,7 +91,18 @@ function validatePasswordStrength(password) {
  */
 function isAllowedMimeType(mimeType, allowedTypes) {
   if (!allowedTypes) {
-    return true; // No restrictions if not specified
+    // Default allowed types if not specified
+    const defaultAllowed = [
+      'image/jpeg', 'image/png', 'image/gif', 'image/webp',
+      'application/pdf', 'text/plain',
+      'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/zip', 'application/x-zip-compressed', 'application/x-rar-compressed', 'application/x-7z-compressed',
+      'application/octet-stream', // For various binary files
+      'video/mp4', 'video/avi', 'video/mov',
+      'audio/mpeg', 'audio/wav', 'audio/mp3'
+    ];
+    return defaultAllowed.includes(mimeType);
   }
   const allowed = allowedTypes.split(',').map(t => t.trim());
   return allowed.includes(mimeType);
