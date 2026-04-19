@@ -21,7 +21,7 @@ const { logActivity } = require('../utils/logging');
 
 const UPLOADS_DIR = path.join(__dirname, '../../uploads');
 const MAX_FILE_SIZE = parseInt(process.env.MAX_FILE_SIZE || 52428800); // 50MB
-const ALLOWED_MIME_TYPES = process.env.ALLOWED_MIME_TYPES || '';
+const ALLOWED_MIME_TYPES = process.env.ALLOWED_MIME_TYPES || 'image/jpeg,image/png,image/gif,image/webp,application/pdf,text/plain,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip,application/x-zip-compressed,application/x-rar-compressed,application/x-7z-compressed,video/mp4,video/quicktime,video/x-msvideo,audio/mpeg,audio/wav,audio/mp3,application/octet-stream';
 
 class FileService {
   /**

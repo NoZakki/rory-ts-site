@@ -17,9 +17,24 @@ export const FileUpload = ({ onUpload, loading }) => {
     'image/jpeg',
     'image/png',
     'image/gif',
+    'image/webp',
     'application/pdf',
     'text/plain',
     'application/zip',
+    'application/x-zip-compressed',
+    'application/x-rar-compressed',
+    'application/x-7z-compressed',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'video/mp4',
+    'video/quicktime',
+    'video/x-msvideo',
+    'audio/mpeg',
+    'audio/wav',
+    'audio/mp3',
+    'application/octet-stream', // Fallback per file sconosciuti
   ];
 
   const validateFile = (file) => {
@@ -31,9 +46,9 @@ export const FileUpload = ({ onUpload, loading }) => {
       return false;
     }
 
-    // Check file type
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      setError('File type not allowed. Allowed: images, PDF, text, ZIP');
+    // Check file type - allow ZIP and common formats
+    if (!ALLOWED_TYPES.includes(file.type) && !file.name.toLowerCase().endsWith('.zip')) {
+      setError('File type not allowed. Supported: images, PDF, text, ZIP, video, audio, Office');
       return false;
     }
 
