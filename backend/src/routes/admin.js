@@ -9,7 +9,7 @@ const AdminController = require('../controllers/AdminController');
 // Admin middleware - check if admin session exists
 const adminAuth = (req, res, next) => {
   if (!req.session || !req.session.isAdmin) {
-    return res.status(401).json({ message: 'Admin authentication required' });
+    return res.status(401).json({ success: false, message: 'Admin authentication required' });
   }
   next();
 };

@@ -13,22 +13,55 @@ const AdminPage = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
 
   useEffect(() => {
-    loadData();
+    checkAdminSession();
   }, []);
+
+  const checkAdminSession = async () => {
+    try {
+      setLoading(true);
+      const statsRes = await adminAPI.getSystemStats();
+      if (statsRes.data) {
+        setIsLoggedIn(true);
+        loadData();
+      }
+    } catch (err) {
+      setLoading(false);
+    }
+  };
+
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const loginRes = await adminAPI.adminLogin(adminEmail, adminPassword);
+      if (loginRes.data.success) {
+        setIsLoggedIn(true);
+        setAdminEmail('');
+        setAdminPassword('');
+        loadData();
+      }
+    } catch (err) {
+      setError('Invalid admin credentials');
+      setLoading(false);
+    }
+  };
 
   const loadData = async () => {
     try {
-      setLoading(true);
       const [usersRes, statsRes] = await Promise.all([
         adminAPI.getAllUsers(),
         adminAPI.getSystemStats(),
       ]);
-      setUsers(usersRes.data.users);
+      setUsers(usersRes.data.users || []);
       setStats(statsRes.data);
+      setError('');
     } catch (err) {
-      setError('Failed to load admin data');
+      setError('Failed to load admin data: ' + (err.response?.data?.message || err.message));
     } finally {
       setLoading(false);
     }
